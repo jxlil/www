@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 type CountdownClockProps = {
-  size?: number;                // tamaño lógico del canvas (en CSS se respeta este tamaño)
+  size?: number;
   lineWidth?: number;
   linePadding?: number;
   start?: Date;
@@ -33,7 +33,6 @@ export default function CountdownClock({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // --- DPI scaling para pantallas retina ---
     const dpr = Math.max(1, window.devicePixelRatio || 1);
     const cssSize = size;
     canvas.style.width = `${cssSize}px`;
@@ -80,7 +79,6 @@ export default function CountdownClock({
       [minutes, hours] = adjust(minutes, hours, 60);
       [hours, days] = adjust(hours, days, 24);
 
-      // días del mes anterior a "to"
       const daysInPrevMonth = new Date(to.getFullYear(), to.getMonth(), 0).getDate();
       [days, months] = adjust(days, months, daysInPrevMonth);
       [months, years] = adjust(months, years, 12);
@@ -114,13 +112,13 @@ export default function CountdownClock({
         seconds = minutes = hours = days = months = years = 0;
       }
 
-      arc(7, progress(start, target, now));                         // progreso total vida/proyecto
-      arc(6, progress(0, 11, 12 - months));                         // meses restantes
-      arc(5, progress(0, monthDays - 1, monthDays - days));         // días restantes del mes
-      arc(4, progress(0, 24, 24 - hours));                          // horas restantes
-      arc(3, progress(0, 60, 60 - minutes));                        // minutos restantes
-      arc(2, progress(0, 60, 60 - seconds));                        // segundos restantes
-      arc(1, progress(0, 1000, 1000 - milliseconds));               // ms restantes
+      arc(7, progress(start, target, now));
+      arc(6, progress(0, 11, 12 - months));
+      arc(5, progress(0, monthDays - 1, monthDays - days));
+      arc(4, progress(0, 24, 24 - hours));
+      arc(3, progress(0, 60, 60 - minutes));
+      arc(2, progress(0, 60, 60 - seconds));
+      arc(1, progress(0, 1000, 1000 - milliseconds));
 
       const str = [years, months, days, hours, minutes, seconds, milliseconds / 10]
         .map((n) => String(Math.floor(n)).padStart(2, "0"))

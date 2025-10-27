@@ -99,7 +99,7 @@ function Hero() {
   return (
     <section className="mx-auto px-4 pb-2 pt-16 sm:px-6">
       <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl">
-        <a className="transition-opacity" href="/tempus">
+        <a className="transition-opacity" href="./tempus">
           {PROFILE.name}
         </a>
       </h1>

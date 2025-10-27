@@ -1,25 +1,18 @@
-// components/ScrambleText.tsx
 "use client";
+
 import { useEffect, useState } from "react";
 import { useScramble } from "use-scramble";
 
 type ScrambleTextProps = {
   text: string;
   className?: string;
-  /** Reejecutar al montar y cada vez que cambie `text` */
   auto?: boolean;
-  /** Lanzar cuando el elemento sea visible (IntersectionObserver) */
   onVisible?: boolean;
-  /** Lanzar en eventos */
   onHover?: boolean;
   onClick?: boolean;
-  /** Velocidad (0..1 aprox; menor = más lento) */
   speed?: number;
-  /** Caracteres revelados por tick */
   tick?: number;
-  /** Caos 0..1 */
   chance?: number;
-  /** Ciclos de mezcla */
   scramble?: number;
 };
 
@@ -44,12 +37,10 @@ export default function ScrambleText({
     playOnMount: false,
   });
 
-  // Auto al montar / cuando cambie el texto
   useEffect(() => {
     if (auto) replay();
   }, [text, auto, replay]);
 
-  // Lanzar cuando sea visible
   useEffect(() => {
     if (!onVisible) return;
     const el = ref.current;
