@@ -8,7 +8,6 @@ const PROFILE = {
   name: "Jalil SA",
   handle: "jxlil",
   title: "Web Scraping Engineer",
-  location: "Durango, México",
   links: {
     github: "https://github.com/jxlil",
     x: "https://www.x.com/jxlilmx",
@@ -138,11 +137,11 @@ function ExperienceRow({
   return (
     <div className="relative grid grid-cols-1 items-start gap-4 py-4 sm:grid-cols-12">
       <div className="sm:col-span-8">
-        <h3 className="flex items-center gap-2 text1xl font-semibold tracking-tight">
-          <span className="text-zinc-400">
-            {String(index + 1).padStart(2, "0")}
+        <h3 className="flex items-center gap-2 text1xl tracking-tight">
+          <span className="text-zinc-400 text-sm">
+            [{String(index + 1).padStart(2, "0")}]
           </span>
-          <ScrambleText text={experienceItem.company} scramble={24} />
+          <ScrambleText className="font-semibold" text={experienceItem.company} scramble={24} />
         </h3>
         <p className="mt-2 max-w-2xl text-zinc-400 text-sm">{experienceItem.role} — {experienceItem.location}</p>
       </div>
@@ -183,11 +182,11 @@ function ProjectRow({
     <Anchor href={href} className="block" aria-label={`Abrir ${projectItem.title}`} newTab={/^https?:\/\//.test(href)}>
       <div className="relative grid grid-cols-1 items-start gap-4 py-4 sm:grid-cols-12">
         <div className="sm:col-span-8">
-          <h3 className="flex items-center gap-2 text1xl font-semibold tracking-tight">
-            <span className="text-zinc-400">
-              {String(index + 1).padStart(2, "0")}
+          <h3 className="flex items-center gap-2 text1xl tracking-tight">
+            <span className="text-zinc-400 text-sm">
+              [{String(index + 1).padStart(2, "0")}]
             </span>
-            <ScrambleText text={projectItem.title} scramble={16} />
+            <ScrambleText className="font-semibold" text={projectItem.title} scramble={16} />
           </h3>
           <p className="mt-2 max-w-2xl text-zinc-400 text-sm">{projectItem.summary}</p>
         </div>
