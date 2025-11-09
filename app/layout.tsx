@@ -8,7 +8,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "jxlil",
+  title: "Jalil SA | jxlil",
   description: "Personal web portfolio showcasing my work, projects, and experience.",
   creator: "Jalil SA",
   authors: [{ name: "Jalil SA", url: "https://jxlil.mx" }],
