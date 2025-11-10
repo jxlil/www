@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const jetbransMono = JetBrains_Mono({
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistMono.variable} min-h-dvh bg-black text-zinc-100 antialiased font-mono`}
+        className={`${jetbransMono.className} min-h-dvh bg-black text-zinc-100 antialiased font-mono`}
       >
         {children}
       </body>

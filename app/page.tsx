@@ -59,27 +59,20 @@ const PROJECTS: Array<{
   ];
 
 const LOCATIONS = [
-  "24.88872, -105.07433",
-  "48.85837, 2.29448",
-  "40.75800, -73.98550",
-  "29.97923, 31.13420",
-  "27.17514, 78.04211",
-  "-13.16307, -72.54513",
-  "30.32160, 35.44440",
-  "13.41250, 103.86667",
-  "27.98810, 86.92500",
-  "40.67690, 117.23690",
-  "34.96714, 135.77272",
-  "36.46130, 25.37500",
-  "25.19720, 55.27440",
-  "-25.34443, 131.03688",
-  "-19.73000, 149.23500",
-  "-2.33330, 34.83330",
-  "63.88040, -22.44950",
-  "51.42540, -116.17730",
-  "-16.50040, -151.74150",
-  "-20.13380, -67.48910",
-  "69.64920, 18.95530",
+  "Durango, Mexico",
+  "Moscow, Russia",
+  "Shanghai, China",
+  "Sao Paulo, Brazil",
+  "Bogota, Colombia",
+  "Madrid, Spain",
+  "Toronto, Canada",
+  "Tokyo, Japan",
+  "Cairo, Egypt",
+  "New York City, US",
+  "Havana, Cuba",
+  "Rome, Italy",
+  "Mumbai, India",
+  "Jakarta, Indonesia",
 ] as const;
 
 
@@ -97,16 +90,16 @@ export default function Page() {
 function Hero() {
   return (
     <section className="mx-auto px-4 pb-2 pt-16 sm:px-6">
-      <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl">
+      <h1 className="text-3xl pb-4 font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl">
         <a className="transition-opacity" href="./tempus">
           {PROFILE.name}
         </a>
       </h1>
       <p className="mt-2 text-sm text-zinc-400">
-        Now: {PROFILE.title}
+        Now: <span className="text-white">{PROFILE.title}</span>
       </p>
       <p className="mt-2 text-sm text-zinc-400">
-        Location: <ScrambleTextRotator phrases={LOCATIONS} intervalMs={6000} />
+        Location: <ScrambleTextRotator className="text-white" phrases={LOCATIONS} intervalMs={6000} />
       </p>
     </section>
   );
