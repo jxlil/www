@@ -89,13 +89,13 @@ export default function Page() {
 
 function Hero() {
   return (
-    <section className="mx-auto px-4 pb-2 pt-16 sm:px-6">
+    <section className="mx-auto  pt-16">
       <h1 className="text-3xl pb-4 font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl">
         <a className="transition-opacity" href="./tempus">
           {PROFILE.name}
         </a>
       </h1>
-      <p className="mt-2 text-sm text-zinc-400">
+      <p className="text-sm text-zinc-400">
         Now: <span className="text-white">{PROFILE.title}</span>
       </p>
       <p className="mt-2 text-sm text-zinc-400">
@@ -107,7 +107,7 @@ function Hero() {
 
 function Experience() {
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="mx-auto max-w-6xl">
       <h2 className="pb-4 pt-10 text-xl font-bold leading-tight tracking-tight" >Experience</h2>
       <ul className="divide-y divide-zinc-900 border-y border-zinc-900">
         {EXPERIENCE.map((c, i) => (
@@ -150,7 +150,7 @@ function ExperienceRow({
 
 function Projects() {
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="mx-auto max-w-6xl">
       <h2 className="pb-4 pt-10 text-xl font-bold leading-tight tracking-tight" >Projects</h2>
       <ul className="divide-y divide-zinc-900 border-y border-zinc-900">
         {PROJECTS.map((c, i) => (
@@ -197,12 +197,12 @@ function ProjectRow({
 
 function Footer() {
   return (
-    <footer className="py-4">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-zinc-400 sm:flex-row sm:px-6">
+    <footer className="mx-auto max-w-6xl text-zinc-400">
+      <div className="py-4 flex flex-col items-center justify-between text-sm sm:flex-row">
         <p>
           © {new Date().getFullYear()}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <IconLink href={PROFILE.links.github} aria="GitHub" Icon={GithubIcon} />
           <IconLink href={PROFILE.links.x} aria="X" Icon={XIcon} />
           <IconLink href={PROFILE.links.instagram} aria="Instagram" Icon={InstagramIcon} />
@@ -227,7 +227,7 @@ function IconLink({
     <Button
       asChild
       variant="ghost"
-      className="h-8 rounded-full text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100"
+      className="group has-[>svg]:px-0 rounded-full hover:bg-transparent shadow-none hover:text-zinc-300 hover:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
     >
       <Anchor href={href} aria-label={aria} newTab={/^https?:\/\//.test(href)}>
         <Icon className="h-4 w-4" />
