@@ -2,6 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import ScrambleText, { ScrambleTextRotator } from "@/components/ScrambleText";
+import { ActivityCalendar } from "react-activity-calendar";
+
+import { useEffect, useState } from 'react';
 
 
 const PROFILE = {
@@ -80,27 +83,115 @@ export default function Page() {
   return (
     <main className="mx-auto w-full max-w-[700px] px-4 py-8">
       <Hero />
-      <Experience />
       <Projects />
+      <Experience />
       <Footer />
     </main>
   );
 }
 
+function GithubActivity() {
+  type Day = {
+    date: string;
+    count: number;
+    level: 0 | 1 | 2 | 3 | 4;
+  };
+  const GITHUB_USER = "jxlil";
+
+  const [data, setData] = useState<Day[] | null>(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch(
+          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}?y=last`
+        );
+        if (!res.ok) throw new Error("Bad response");
+        const json = await res.json();
+        setData(json.contributions as Day[]);
+      } catch (e) {
+        console.error(e);
+        setError(true);
+      }
+    }
+
+    load();
+  }, []);
+
+
+  return (
+    <section className="mt-12 mb-12">
+      <div className="w-full max-w-[700px]">
+        {error && (
+          <div className="h-[87.5px] rounded-xl text-xs text-zinc-500 flex items-center justify-center">
+            Could not load activity.
+          </div>
+        )}
+
+        {!error && !data && (
+          <div className="h-[87.5px] w-full rounded-xl animate-pulse" />
+        )}
+
+        {!error && data && (
+          <ActivityCalendar
+            data={data}
+            showColorLegend={false}
+            showTotalCount={false}
+            showMonthLabels={false}
+            blockSize={10.5}
+            blockMargin={2}
+            colorScheme="dark"
+            theme={{
+              dark: ["#0101011a", "#5ee9b5"],
+            }}
+            renderBlock={(block, activity) => {
+              if (!activity.count) return block;
+              const date = activity.date;
+              const url = `https://github.com/${GITHUB_USER}?tab=overview&from=${date}&to=${date}`;
+
+              return (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${activity.count} contributions on ${date}`}
+                  className="cursor-pointer"
+                >
+                  {block}
+                </a>
+              );
+            }}
+          />
+        )}
+      </div>
+    </section>
+  );
+
+}
+
 function Hero() {
   return (
-    <section className="mx-auto  pt-16">
-      <h1 className="text-3xl pb-4 font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl">
-        <a className="transition-opacity" href="./tempus">
-          {PROFILE.name}
-        </a>
-      </h1>
-      <p className="text-sm text-zinc-400">
-        Now: <span className="text-white">{PROFILE.title}</span>
-      </p>
-      <p className="mt-2 text-sm text-zinc-400">
-        Location: <ScrambleTextRotator className="text-white" phrases={LOCATIONS} intervalMs={6000} />
-      </p>
+    <section className="flex justify-between mx-auto  pt-16">
+      <div className="flex flex-col justify-center">
+        <h1 className="text-3xl pb-4 font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl">
+          <a className="transition-opacity" href="./tempus">
+            {PROFILE.name}
+          </a>
+        </h1>
+        <p className="text-sm text-zinc-400">
+          Now: <span className="text-white">{PROFILE.title}</span>
+        </p>
+        <p className="mt-2 text-sm text-zinc-400">
+          Location: <ScrambleTextRotator className="text-white" phrases={LOCATIONS} intervalMs={3000} />
+        </p>
+      </div>
+
+      <div className="flex sm:block">
+        <div className="relative h-22 w-22 md:h-28 md:w-28 rounded-full overflow-hidden  bg-black">
+          <img className="filter grayscale" src="https://avatars.githubusercontent.com/u/61639983?v=4" alt="" />
+        </div>
+      </div>
     </section>
   );
 }
@@ -151,7 +242,8 @@ function ExperienceRow({
 function Projects() {
   return (
     <section className="mx-auto max-w-6xl">
-      <h2 className="pb-4 pt-10 text-xl font-bold leading-tight tracking-tight" >Projects</h2>
+      <h2 className="border-zinc-900 border-b pb-4 pt-10 text-xl font-bold leading-tight tracking-tight" >Projects</h2>
+      <GithubActivity />
       <ul className="divide-y divide-zinc-900 border-y border-zinc-900">
         {PROJECTS.map((c, i) => (
           <li key={c.slug} className="group relative">
@@ -185,9 +277,9 @@ function ProjectRow({
         </div>
 
         <div className="sm:col-span-4 sm:flex sm:flex-col sm:items-end">
-          <div className="flex items-center gap-2 text-zinc-400">
-            <span className="text-sm">{projectItem.year}</span>
-            <ArrowUpRightIcon className="h-4 w-4 opacity-70 transition-opacity group-hover:opacity-100 group-hover:text-emerald-300" />
+          <div className="flex items-center gap-2 ">
+            <span className="text-sm text-zinc-400">{projectItem.year}</span>
+            <ArrowUpRightIcon className="h-4 w-4 text-emerald-300 opacity-80 transition-opacity group-hover:opacity-100" />
           </div>
         </div>
       </div>
