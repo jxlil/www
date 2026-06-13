@@ -1,16 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const jetbransMono = JetBrains_Mono({
-  variable: "--font-mono",
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Jalil SA | jxlil",
-  description: "Personal web portfolio showcasing my work, projects, and experience.",
+  title: "jxlil.mx — Jalil",
+  description:
+    "Jalil (jxlil) — developer focused on web scraping, back-end, and automation.",
   creator: "Jalil SA",
   authors: [{ name: "Jalil SA", url: "https://jxlil.mx" }],
   category: "technology",
@@ -21,13 +28,11 @@ export const metadata: Metadata = {
       { url: "./favicon.png", sizes: "16x16", type: "image/png" },
     ],
     apple: [{ url: "./favicon.png", sizes: "180x180" }],
-
-  }
-
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#1b1b1e",
   width: "device-width",
   initialScale: 1,
 };
@@ -39,9 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body
-        className={`${jetbransMono.className} min-h-dvh bg-black text-zinc-100 antialiased font-mono`}
-      >
+      <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>

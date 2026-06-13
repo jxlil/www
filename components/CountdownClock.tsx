@@ -18,7 +18,7 @@ export default function CountdownClock({
   lineWidth = 2,
   linePadding = 20,
   start = new Date("1996-08-10T00:00:00"),
-  target = new Date("2066-08-10T00:00:00"),
+  target = new Date("2071-08-10T00:00:00"),
   font = "1px monospace",
   color = "#fff",
   className,
